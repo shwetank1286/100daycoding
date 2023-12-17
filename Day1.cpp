@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-    /*
+    
 //constant 
     const int a = 5;
     cout << "the value of a was:" << a << endl;
@@ -92,7 +92,7 @@ int main()
     }while(false);
     
 //---------------------------------------------------------------------*---------------------------------------------------------------------
-// print the table of 5 with the help of the for loop 
+//Print the table of 5 with the help of the for loop 
 
     
     int a=5;
@@ -133,6 +133,60 @@ int main()
     do{
         cout<<i<<" X "<<a<<" = "<<i*a<<" "<<endl;
         i++;
-    }while(i<=10);*/
-    return 0;
-}
+    }while(i<=10);
+//------------------------------------------------*-------------------------------------
+//#geek for geek code of the day 17-12-2023
+//day2 of 100 day challenge 
+    //code in c+++
+class Solution{
+public:	
+	// calculate the maximum sum with out adjacent
+	int findMaxSum(int *arr, int n) {
+	    // code here
+	    if (n==1)
+	    return arr[0];
+	    int a,b,c;
+	    a=arr[0];
+	    b=max(a,arr[1]);
+	    for(int i=2;i<n;i++)
+	    {
+	        c=max(b,a+arr[i]);
+	        a=b;
+	        b=c;
+	    }
+	    return c;
+	}
+};
+//#leetcode code of the day 17-12-2023
+//2353. Design a Food Rating System
+//code in c+++
+class FoodRatings {
+ public:
+  FoodRatings(vector<string>& foods, vector<string>& cuisines,
+              vector<int>& ratings) {
+    for (int i = 0; i < foods.size(); ++i) {
+      cuisineToRatingAndFoods[cuisines[i]].insert({-ratings[i], foods[i]});
+      foodToCuisine[foods[i]] = cuisines[i];
+      foodToRating[foods[i]] = ratings[i];
+    }
+  }
+
+  void changeRating(string food, int newRating) {
+    const string cuisine = foodToCuisine[food];
+    const int oldRating = foodToRating[food];
+    auto& ratingAndFoods = cuisineToRatingAndFoods[cuisine];
+    ratingAndFoods.erase({-oldRating, food});
+    ratingAndFoods.insert({-newRating, food});
+    foodToRating[food] = newRating;
+  }
+
+  string highestRated(string cuisine) {
+    return cuisineToRatingAndFoods[cuisine].begin()->second;
+  }
+
+ private:
+  // {cuisine: {(-rating, food)}} stores negative rating for smarter comparison
+  unordered_map<string, set<pair<int, string>>> cuisineToRatingAndFoods;
+  unordered_map<string, string> foodToCuisine;
+  unordered_map<string, int> foodToRating;
+};
