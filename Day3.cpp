@@ -10,7 +10,7 @@ Welcome to GDB Online.
 using namespace std;
 int main()
 {
-    /*
+
     
 //break and continue in for loop 
     for(int i=0;i<40;i++)
@@ -130,12 +130,60 @@ int main()
     cout<<"the value of *(p+2) is "<<*(p+2)<<endl;
     cout<<"the value of *(p+3) is "<<*(p+3)<<endl;
     
-//array usingf pointes 
+//array using pointers 
     int marks[]={32,24,25,26};
     int *p=marks;
     cout<<*(p++)<<endl;
     cout<<*(++p)<<endl;
-    */
 
-    return 0;
-}
+//.............................................................*.............................................................
+//#geek for geek code of the day 18-12-2023
+//day3 of 100 day challenge 
+    //code in c+++
+class Solution {
+  public:
+    int gameOfXor(int N , int A[]) {
+        int ans=0;
+        int len=N;
+        for(int i=0;i<N;i++){
+            int left=i+1;
+            int right =(N-i);
+            len=left*right;
+            if(len & 1){
+                ans=(ans^A[i]);
+            }
+        }
+        return ans;
+        
+    }
+};
+//#leetcode code of the day 18-12-2023
+//1913. Maximum Product Difference Between Two Pairs
+//code in c+++
+class Solution {
+ public:
+  int maxProductDifference(vector<int>& nums) {
+    int max1 = INT_MIN;
+    int max2 = INT_MIN;
+    int min1 = INT_MAX;
+    int min2 = INT_MAX;
+
+    for(const int num : nums){
+        if(num > max1){
+            max2 = max1;
+            max1 = num;
+        }
+        else if(num > max2){
+            max2 = num;
+        }
+        if(num < min1){
+            min2=min1;
+            min1 = num;
+        }
+        else if(num < min2){
+            min2 = num;
+        }
+    }
+    return max1*max2-min1*min2;
+  }
+};
