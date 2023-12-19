@@ -9,7 +9,7 @@ Code, Compile, Run and Debug online from anywhere in world.
 #include <iostream>
 
 using namespace std;
-        /*
+        
 int main(){
     
     cout<<"JAY MAHAKAL";
@@ -177,5 +177,52 @@ int main(){
         int c = a+b;
         return c;
     }
-    */
-//
+    
+//.................................................*..................................................
+//#geek for geek code of the day 19-12-2023
+//day4 of 100 day challenge 
+    //code in c+++
+class Solution
+{
+    public:
+    //Function to find the first position with different bits.
+    int posOfRightMostDiffBit(int m, int n)
+    {
+        // Your code here
+        int mask=1;
+        int pos=1;
+        if(m==n)
+            return -1;
+        while((mask & m)==(mask & n)){
+            pos+=1;
+            mask<<=1;
+            
+        }return pos;
+    }
+    
+};
+//#leetcode code of the day 19-12-2023
+//661. Image Smoother
+//code in c+++
+class Solution {
+ public:
+  vector<vector<int>> imageSmoother(vector<vector<int>>& M) {
+    const int m = M.size();
+    const int n = M[0].size();
+    vector<vector<int>> ans(m, vector<int>(n));
+
+    for (int i = 0; i < m; ++i)
+      for (int j = 0; j < n; ++j) {
+        int ones = 0;
+        int count = 0;
+        for (int x = max(0, i - 1); x < min(m, i + 2); ++x)
+          for (int y = max(0, j - 1); y < min(n, j + 2); ++y) {
+            ones +=M[x][y];
+            ++count;
+          }
+        ans[i][j] = ones / count;
+      }
+
+    return ans;
+  }
+};
