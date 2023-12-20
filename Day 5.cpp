@@ -9,7 +9,7 @@ Code, Compile, Run and Debug online from anywhere in world.
 #include <iostream>
 
 using namespace std;
-    /*
+    
 //call by pointers reference two numbers
     void swapPointers(int *a, int *b){
         int temp = *a;
@@ -111,7 +111,36 @@ using namespace std;
         int money = 100000;
         cout<<"If you have "<<money<<" in your bank account, yopu will get "<<moneyreceived(money)<<" after 1 year"<<endl;
         cout<<"for VIP, If you have "<<money<<" in your bank account, yopu will get "<<moneyreceived(money, 1.1)<<" after 1 year";
-    */
-    
-    return 0;
-}
+
+//.................................................*..................................................
+//day5 of 100 day challenge 
+//#geek for geek code of the day 20-12-2023
+//Modified Game of Nim
+    //code in c+++
+class Solution{
+    public:
+    int findWinner(int n, int A[]){
+       int xorr=0;
+       for(int i=0; i<n; i++)
+       xorr^=A[i];
+       if(!xorr)
+       return 1;
+       else
+       return(n%2)+1;
+    }
+};
+//#leetcode code of the day 20-12-2023
+//2706. Buy Two Chocolates
+//code in c+++
+class Solution {
+public:
+    int buyChoco(vector<int>& prices, int money) {
+        sort(prices.begin(), prices.end());
+        int price = prices[0]+prices[1];
+        if(price <= money)
+        {
+            return money-price;
+        }
+        return money;
+    }
+};
