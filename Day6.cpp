@@ -10,7 +10,7 @@ Code, Compile, Run and Debug online from anywhere in world.
 
 using namespace std;
 
-/*
+
 //fatorial by recursion
     int factorial(int n){
         if (n<=1){
@@ -86,22 +86,48 @@ using namespace std;
         shwetank.e = 98;
         shwetank.setData(2, 9, 10);
         shwetank.getData();
-       */
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+   
     return 0;
 }
+
+//.................................................*..................................................
+//day6 of 100 day challenge 
+//#geek for geek code of the day 21-12-2023
+//candy
+    //code in c+++
+class Solution {
+    public:
+    int minCandy(int N, vector<int> &ratings) {
+       vector<int> v(N,1);
+       for (int i=1; i<N; i++){
+           if (ratings[i]>ratings[i-1])
+           v[i]=v[i-1]+1;
+       }
+       for(int i=N-2; i>=0; i--){
+           if (ratings[i]>ratings[i+1])
+           v[i]=max(v[i],v[i+1]+1);
+       }
+       int sum=0;
+       for(int i=0; i<N; i++)
+       sum+=v[i];
+       return sum;
+    }
+};
+//#leetcode code of the day 21-12-2023
+//1637. Widest Vertical Area Between Two Points Containing No Points
+//code in c+++
+class Solution {
+public:
+    int maxWidthOfVerticalArea(vector<vector<int>>& points) {
+        int ans = 0;
+        vector <int> xs;
+        for(const vector<int>& point : points){
+            const int x = point[0];
+            xs.push_back(x);
+        }
+        ranges :: sort(xs);
+        for(int i=1; i<xs.size();++i)
+            ans = max(ans, xs[i]-xs[i-1]);
+        return ans;
+    }
+};
