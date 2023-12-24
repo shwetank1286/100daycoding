@@ -10,7 +10,7 @@ Code, Compile, Run and Debug online from anywhere in world.
 
 using namespace std;
 //static data function
-/*
+
 class Employee{
     int id;
 
@@ -74,7 +74,49 @@ int main()
     beauty.setData();
     beauty.getData();
     beauty.getCount();
-*/
+
 
     return 0;
 }
+
+//.................................................*..................................................
+//day9 of 100 day challenge 
+//#geek for geek code of the day 24-12-2023
+//Buy Maximum Stocks if i stocks can be bought on i-th day
+    //code in c+++
+class Solution {
+public:
+    int buyMaximumProducts(int n, int k, int price[]){
+        //Write your code here
+        vector<pair<int, int>>temp;
+        for(int i=0; i<n; i++){
+            temp.push_back({price[i],1+i});
+        }
+        sort(temp.begin(), temp.end());
+        int cnt=0;
+        for(int i=0; i<n; i++){
+            if(temp[i].first<=k){
+                int x=(k)/(temp[i].first);
+                int bought=min(temp[i].second, x);
+                k-=bought*temp[i].first;
+                cnt+=bought;
+            }else break;
+        }
+        return cnt;
+    }
+};
+
+//#leetcode code of the day 24-12-2023
+//1758. Minimum Changes To Make Alternating Binary String
+//code in c+++
+class Solution {
+public:
+    int minOperations(string s) {
+        int cost10;
+        for(int i=0; i<s.length();++i)
+            if(s[i]-'0' == i%2)
+                ++ cost10;
+        const int cost01=s.length()-cost10;
+        return min(cost10,cost01);
+    }
+};
