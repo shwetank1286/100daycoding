@@ -9,7 +9,7 @@ Code, Compile, Run and Debug online from anywhere in world.
 #include <iostream>
 
 using namespace std;
-/*
+
 //member friend function
 
 
@@ -178,9 +178,57 @@ int main()
 	shwetank object1;
 	shweta object2;
 	object2.objects(object1);
-*/
 
     return 0;
 }
     
-    
+//.................................................*..................................................
+//day 12 of 100 day challenge 
+//#geek for geek code of the day 27-12-2023
+//Anti Diagonal Traversal of Matrix
+    //code in c+++
+class Solution {
+  public:
+    vector<int> antiDiagonalPattern(vector<vector<int>> matrix) 
+    {
+        int n = matrix.size();
+        vector<int> ans;
+        for(int j = 0; j<n; j++){
+            for(int x=0, y=j; y>-1 and x<n; x++, y--){
+                ans.push_back(matrix[x][y]);
+            }
+        }
+        for(int i = 1; i<n; i++){
+            for(int y=n-1, x=i; y>-1 and x<n; x++, y--){
+                ans.push_back(matrix[x][y]);
+            }
+        }
+        return ans;
+    }
+};
+
+//#leetcode code of the day 27-12-2023
+//1578. Minimum Time to Make Rope Colorful
+//code in c+++
+class Solution {
+ public:
+  int minCost(string colors, vector<int>& neededTime) {
+    int ans = 0;
+    int maxNeededTime = neededTime[0];
+
+    for (int i = 1; i < colors.length(); ++i)
+      if (colors[i] == colors[i - 1]) {
+        ans += min(maxNeededTime, neededTime[i]);
+        // For each continuous group, Bob needs to remove every balloon except
+        // the one with the maximum `neededTime`. So, he should hold the balloon
+        // with the highest `neededTime` in his hand.
+        maxNeededTime = max(maxNeededTime, neededTime[i]);
+      } else {
+        // If the current balloon is different from the previous one, discard
+        // the balloon from the previous group and hold the new one in hand.
+        maxNeededTime = neededTime[i];
+      }
+
+    return ans;
+  }
+};  
