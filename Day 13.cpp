@@ -92,3 +92,83 @@ int main(){
     
     return 0;
 }
+
+//.................................................*..................................................
+//day 13 of 100 day challenge 
+//#geek for geek code of the day 28-12-2023
+//Wildcard string matching
+    //code in c+++
+class Solution{
+    public:
+    bool match(string wild, string pattern)
+    {
+        int n = wild.size();
+        int m = pattern.size();
+        
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+        dp[n][m] = 1;
+        
+        for(int i = n - 1; i > -1; i--){
+            for(int j = m - 1; j > -1; j--){
+                if(wild[i] == '?')
+                    dp[i][j] = dp[i + 1][j + 1];
+                else if(wild[i] == '*'){
+                    dp[i][j] = dp[i + 1][j + 1] or dp[i][j+1];
+                }
+                else{
+                    if(wild[i] == pattern[j])
+                    dp[i][j] = dp[i + 1][j + 1];
+                    else
+                    dp[i][j] = 0;
+                }
+            }
+        }
+        return dp[0][0];
+    }
+};
+
+//#leetcode code of the day 27-12-2023
+//1531. String Compression II
+//code in c+++
+class Solution {
+ public:
+  int getLengthOfOptimalCompression(string s, int k) {
+    dp.resize(s.length(), vector<int>(k + 1, kMax));
+    return compression(s, 0, k);
+  }
+
+ private:
+  static constexpr int kMax = 101;
+  vector<vector<int>> dp;
+
+  int compression(const string& s, int i, int k) {
+    if (k < 0)
+      return kMax;
+    if (i == s.length() || s.length() - i <= k)
+      return 0;
+    if (dp[i][k] != kMax)
+      return dp[i][k];
+
+    int maxFreq = 0;
+    vector<int> count(128);
+    for (int j = i; j < s.length(); ++j) {
+      maxFreq = max(maxFreq, ++count[s[j]]);
+      dp[i][k] = min(  
+          dp[i][k],    
+          getLength(maxFreq) +
+              compression(s, j + 1, k - (j - i + 1 - maxFreq)));
+    }
+
+    return dp[i][k];
+  }
+
+  int getLength(int maxFreq) {
+    if (maxFreq == 1)
+      return 1;  
+    if (maxFreq < 10)
+      return 2; 
+    if (maxFreq < 100)
+      return 3;  
+    return 4; 
+  }
+};
