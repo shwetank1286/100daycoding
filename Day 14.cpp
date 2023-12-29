@@ -9,7 +9,7 @@ Code, Compile, Run and Debug online from anywhere in world.
 #include <iostream>
 
 using namespace std;
-/*
+
 //constructors and distructors
 class complex{
     int a, b;
@@ -88,7 +88,69 @@ int main(){
     
     a.printNumber();
     b.printNumber();
-*/
+
 
     return 0;
 }
+
+//.................................................*..................................................
+//day 14 of 100 day challenge 
+//#geek for geek code of the day 29-12-2023
+//Check if a string is repetition of its substring of k-length
+    //code in c+++
+class Solution{
+public:
+	
+	int kSubstrConcat (int n, string s, int k)
+	{
+	    if(n%k)
+	        return 0;
+	       
+	    map<vector<int>,int> substr;
+	    
+	    vector<int> f(26, 0);
+	    
+	    for(int i = 0; i < n; i += k){
+	        for(int j = i - k; j < i and j > -1; j++ )
+	            --f[s[j] - 'a'];
+	        for(int j = i; j < i +k; j++)
+	            ++f[s[j] - 'a'];
+	           
+	        substr[f]++;
+	        
+	        if(substr.size() > 2)
+	            return 0;
+	    }
+	    
+	    int freq = (*substr.begin()).second;
+	    
+	    return (freq == 1 or freq >= n/k -1);
+	}
+
+};
+
+//#leetcode code of the day 29-12-2023
+//1335. Minimum Difficulty of a Job Schedule
+//code in c+++
+class Solution {
+public:
+    int minDifficulty(vector<int>& jobDifficulty, int d) {
+        int n = jobDifficulty.size();
+        const int inf = 1e5;
+        vector<vector<int>>dp(n+1,vector<int>(d+1,inf));
+        dp[n][d]=0;
+        
+        for(int i = n - 1; i > -1; i--){
+            for(int j = d - 1; j > -1; j--){
+                int MAX = 0;
+
+                for(int k = i; k < n; k++){
+                    MAX = max(MAX, jobDifficulty[k]);
+
+                    dp[i][j] = min(dp[i][j], MAX + dp[k + 1][j + 1]);
+                }
+            }
+        }
+        return dp[0][0] >= inf ? -1 : dp[0][0];
+    }
+};
