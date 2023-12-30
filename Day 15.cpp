@@ -12,7 +12,7 @@ using namespace std;
 
 //prameterised consytructors
 //point constructor continue
-/*
+
 class point{
     int x, y;
     public:
@@ -64,6 +64,51 @@ int main()
    point q(2,2);
    q.display(); 
    distance(p,q);
-*/
+
     return 0;
 }
+
+//.................................................*..................................................
+//day 15 of 100 day challenge 
+//#geek for geek code of the day 30-12-2023
+//Winner of an election
+    //code in c+++
+class Solution{
+  public:
+  
+    //Function to return the name of candidate that received maximum votes.
+    vector<string> winner(string arr[],int n)
+    {
+        map<string,int> track;
+    for(int i{0}; i < n; i++){
+         track[arr[i]]++;
+    }
+    
+    string name = "";
+    int max{0};
+    for(auto pair : track){
+        if(pair.second > max || (pair.second == max && pair.first < name)){
+            max = pair.second;
+            name = pair.first;
+        }
+    }
+    return {name, to_string(max)};
+    }
+};
+
+//#leetcode code of the day 30-12-2023
+//1897. Redistribute Characters to Make All Strings Equal
+//code in c+++
+class Solution {
+ public:
+  bool makeEqual(vector<string>& words) {
+    vector<int> count(26);
+
+    for (const string& word : words)
+      for (const char c : word)
+        ++count[c - 'a'];
+
+    return ranges::all_of(count,
+                          [&](const int c) { return c % words.size() == 0; });
+  }
+};
