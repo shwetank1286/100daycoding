@@ -91,3 +91,64 @@ int main(){
 
 // return 0;
 }
+
+//.................................................*..................................................
+//day 16 of 100 day challenge 
+//#geek for geek code of the day 31-12-2023
+//New Year resolution
+    //code in c+++
+class Solution {
+public:
+
+    bool ans = 0;
+    
+    void solve(int coins[], int index, int sum, int &N, vector<vector<int>> &dp) {
+        
+        if(sum != 0 && (sum == 2024 || sum % 20 == 0 || sum % 24 == 0)) {
+            ans = 1;
+            return;
+        }
+        
+        if(index >= N || sum > 2024) return;
+        if(dp[index][sum] != -1) return;
+        
+        solve(coins, index + 1, sum, N, dp);
+        solve(coins, index + 1, sum + coins[index], N, dp);
+        
+        dp[index][sum] = ans;
+    }    
+    
+    
+    int isPossible(int N , int coins[]) {
+        
+        int total = 0;
+        for(int i = 0; i < N; i++) total += coins[i];
+        
+        vector<vector<int>> dp(N, vector<int> (total + 1, -1));
+        solve(coins, 0, 0, N, dp);
+    
+        return ans;
+    }
+    
+};
+
+//#leetcode code of the day 31-12-2023
+//1624. Largest Substring Between Two Equal Characters
+//code in c+++
+class Solution {
+ public:
+  int maxLengthBetweenEqualCharacters(string s) {
+    int ans = -1;
+    vector<int> lastSeen(26, -1);
+
+    for (int i = 0; i < s.length(); ++i) {
+      const int c = s[i] - 'a';
+      if (lastSeen[c] == -1)
+        lastSeen[c] = i;
+      else
+        ans = max(ans, i - lastSeen[c] - 1);
+    }
+
+    return ans;
+  }
+};
