@@ -95,10 +95,44 @@ int main(){
 //.................................................*..................................................
 //day 17 of 100 day challenge 
 //#geek for geek code of the day 01-01-2024
-//
+//Array Pair Sum Divisibility Problem
     //code in c+++
-
+class Solution {
+  public:
+    bool canPair(vector<int> nums, int k) {
+        if(nums.size()&1)return false;
+        int arr[k]={0};
+        for(auto it:nums){
+            arr[it%k]+=1;
+        }
+        for(int i=0;i<k;i++){
+            if(i==0){
+                if(arr[i]&1)return false;
+                else continue;
+            }
+            if(i==k-i){
+                if(arr[i]&1)return false;
+            }
+            if(arr[i]!=arr[k-i])return false;
+        }
+        return true;
+    }
+};
 
 //#leetcode code of the day 01-01-2024
-//
+//455. Assign Cookies
 //code in c+++
+class Solution {
+ public:
+  int findContentChildren(vector<int>& g, vector<int>& s) {
+    ranges::sort(g);
+    ranges::sort(s);
+
+    int i = 0;
+    for (int j = 0; j < s.size() && i < g.size(); ++j)
+      if (g[i] <= s[j])
+        ++i;
+
+    return i;
+  }
+};
