@@ -7,7 +7,6 @@ Code, Compile, Run and Debug online from anywhere in world.
 
 *******************************************************************************/
 #include <iostream>
-
 using namespace std;
 /*
 //example of dynamically initializing of object
